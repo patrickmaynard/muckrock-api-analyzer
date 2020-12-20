@@ -72,3 +72,4 @@ bin/console app:download-major-city-data
 * Add line charts of the best and worst, ranked over time
 * Deploy to muckdata.patrickmaynard.com instead of just running it locally
 * Maybe add weekly or monthly tweets, eventually?
+* Maybe add a Sonata admin interface for editing/removing the posts
