@@ -71,3 +71,4 @@ bin/console app:download-major-city-data
 * Add an emailer to send the latest updates to your inbox
 * Add line charts of the best and worst, ranked over time
 * Deploy to muckdata.patrickmaynard.com instead of just running it locally
+* Maybe add weekly or monthly tweets, eventually?
