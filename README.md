@@ -58,6 +58,12 @@ echo "docker/logs/" >> .git/info/exclude
 echo "docker/database/data/" >> .git/info/exclude
 ```
 
+### Importing the major cities from cities.json
+
+```
+bin/console app:setup
+```
+
 ### Running the analyzer
 
 ```
