@@ -61,20 +61,20 @@ echo "docker/database/data/" >> .git/info/exclude
 ### Importing the major cities from cities.json
 
 ```
-bin/console app:setup
+/var/www/bin/console app:setup
 ```
 
 ### Running the analyzer
 
 ```
-bin/console app:download-major-city-data
+/var/www/bin/console app:download-major-city-data
 ```
 (To see results, visit http://localhost/)
 
 ### TODOs:
 
 * Increase the number of listed cities from three to five
-* Create a cron job to run the thing every month, adding a how-to in this file
+* Create a cron job to run the thing every week, adding a how-to in this file
 * Add an emailer to send the latest updates to your inbox
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Add line charts of the best and worst, ranked over time
