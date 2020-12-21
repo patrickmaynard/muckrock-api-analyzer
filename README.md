@@ -67,9 +67,10 @@ bin/console app:download-major-city-data
 
 ### TODOs:
 
+* Increase the number of listed cities from three to five
 * Create a cron job to run the thing every month, adding a how-to in this file
 * Add an emailer to send the latest updates to your inbox
-* Add a testing pipeline for GitHub
+* Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Add line charts of the best and worst, ranked over time
 * Deploy to muckdata.patrickmaynard.com instead of just running it locally
 * Maybe add weekly or monthly tweets, eventually?
