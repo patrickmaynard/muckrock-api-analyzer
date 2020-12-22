@@ -14,6 +14,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class MajorCityRepository extends ServiceEntityRepository
 {
+    public const CITIES_TO_SHOW = 5;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, MajorCity::class);
@@ -37,7 +39,7 @@ class MajorCityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBUilder('m')
             ->orderBy('m.averageResponseTime', 'DESC')
-            ->setMaxResults(3)
+            ->setMaxResults(self::CITIES_TO_SHOW)
             ->getQuery()
             ->getResult()
         ;
@@ -47,7 +49,7 @@ class MajorCityRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('m')
             ->orderBy('m.successRate', 'ASC')
-            ->setMaxResults(3)
+            ->setMaxResults(self::CITIES_TO_SHOW)
             ->getQuery()
             ->getResult()
         ;

@@ -64,13 +64,13 @@ class DownloadMajorCityDataCommand extends Command
                     $majorCity->setLastUpdate(
                         new \DateTime()
                     );
-                    $this->nextPageEndpoint = $page->next;
                     $counter++;
                     if ($counter === self::NUMBER_OF_CITIES) {
                         $this->entityManager->flush();
                         break(2);
                     }
                 }
+                $this->nextPageEndpoint = $page->next;
             }
         }
 

@@ -74,6 +74,7 @@ echo "docker/database/data/" >> .git/info/exclude
 ### TODOs:
 
 * Increase the number of listed cities from three to five
+* Move most logic from the scraping command to a service
 * Create a cron job to run the thing every week, adding a how-to in this file
 * Add an emailer to send the latest updates to your inbox
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
