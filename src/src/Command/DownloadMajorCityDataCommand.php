@@ -44,6 +44,8 @@ class DownloadMajorCityDataCommand extends Command
     ): int {
         $io = new SymfonyStyle($input, $output);
 
+        //$this->removeAllCities();
+
         $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
             $page = $this->getNextEndpointAsObj();
@@ -64,11 +66,11 @@ class DownloadMajorCityDataCommand extends Command
                     $majorCity->setLastUpdate(
                         new \DateTime()
                     );
-                    $counter++;
                     if ($counter === self::NUMBER_OF_CITIES) {
                         $this->entityManager->flush();
                         break(2);
                     }
+                    $counter++;
                 }
                 $this->nextPageEndpoint = $page->next;
             }
@@ -107,6 +109,7 @@ class DownloadMajorCityDataCommand extends Command
     protected function analyzeAndCreatePost()
     {
         //$this->removeAllPosts();
+
         $worstResponseTimeCities = $this->majorCityRepository->getWorstResponseTimeCities();
         $worstSuccessRateCities = $this->majorCityRepository->getWorstSuccessRateCities();
         $bestResponseTimeCities = $this->majorCityRepository->getBestResponseTimeCities();
@@ -171,6 +174,19 @@ class DownloadMajorCityDataCommand extends Command
         $posts = $postRepository->findAll();
         foreach ($posts as $post) {
             $this->entityManager->remove($post);
+        }
+        $this->entityManager->flush();
+    }
+
+    protected function removeAllCities()
+    {
+        $majorCityRepository = $this
+            ->entityManager
+            ->getRepository(MajorCity::class)
+        ;
+        $cities = $majorCityRepository->findAll();
+        foreach ($cities as $city) {
+            $this->entityManager->remove($city);
         }
         $this->entityManager->flush();
     }
