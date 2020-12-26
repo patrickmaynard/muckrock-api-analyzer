@@ -44,7 +44,7 @@ class DownloadMajorCityDataCommand extends Command
     ): int {
         $io = new SymfonyStyle($input, $output);
 
-        $counter = 1;
+        $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
             $page = $this->getNextEndpointAsObj();
             sleep(self::RATE_LIMIT_DELAY);
@@ -109,6 +109,8 @@ class DownloadMajorCityDataCommand extends Command
         //$this->removeAllPosts();
         $worstResponseTimeCities = $this->majorCityRepository->getWorstResponseTimeCities();
         $worstSuccessRateCities = $this->majorCityRepository->getWorstSuccessRateCities();
+        $bestResponseTimeCities = $this->majorCityRepository->getBestResponseTimeCities();
+        $bestSuccessRateCities = $this->majorCityRepository->getBestSuccessRateCities();
         $post = new Post;
         $now = new \DateTime;
         $todayString = $now->format('Y-m-d');
@@ -126,6 +128,26 @@ class DownloadMajorCityDataCommand extends Command
 
         $content .= '<h3>Worst success rates</h3>';
         foreach ($worstSuccessRateCities as $city) {
+            /* @var MajorCity $city */
+            $content .= $city->getName()
+                . ' - '
+                . $city->getSuccessRate()
+                . '%<br>'
+            ;
+        }
+
+        $content .= '<h3>Best average response times</h3>';
+        foreach ($bestResponseTimeCities as $city) {
+            /* @var MajorCity $city */
+            $content .= $city->getName()
+                . ' - '
+                . $city->getAverageResponseTime()
+                . ' days<br>'
+            ;
+        }
+
+        $content .= '<h3>Best success rates</h3>';
+        foreach ($bestSuccessRateCities as $city) {
             /* @var MajorCity $city */
             $content .= $city->getName()
                 . ' - '

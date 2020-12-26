@@ -45,6 +45,16 @@ class MajorCityRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getBestResponseTimeCities()
+    {
+        return $this->createQueryBUilder('m')
+            ->orderBy('m.averageResponseTime', 'ASC')
+            ->setMaxResults(self::CITIES_TO_SHOW)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function getWorstSuccessRateCities()
     {
         return $this->createQueryBuilder('m')
@@ -53,6 +63,16 @@ class MajorCityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getBestSuccessRateCities()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.successRate', 'DESC')
+            ->setMaxResults(self::CITIES_TO_SHOW)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     // /**
