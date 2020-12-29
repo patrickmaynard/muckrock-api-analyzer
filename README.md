@@ -77,6 +77,8 @@ x Increase the number of listed cities from three to five
 x Change the order of results, so newest are shown on top
 x Include the best few along with the worst few
 x Get rid of $this->removeAllPosts() in the command
+* Add app:delete:posts command that takes an optional date argument
+* Add app:delete:major-cities command that wipes out all cities in the DB
 * Move most logic from the scraping command to a service
 * Create a cron job to run the thing every week, adding a how-to in this file
 * Add an emailer to send the latest updates to your inbox
