@@ -44,8 +44,6 @@ class DownloadMajorCityDataCommand extends Command
     ): int {
         $io = new SymfonyStyle($input, $output);
 
-        //$this->removeAllCities();
-
         $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
             $page = $this->getNextEndpointAsObj();
@@ -108,7 +106,6 @@ class DownloadMajorCityDataCommand extends Command
 
     protected function analyzeAndCreatePost()
     {
-        //$this->removeAllPosts();
 
         $worstResponseTimeCities = $this->majorCityRepository->getWorstResponseTimeCities();
         $worstSuccessRateCities = $this->majorCityRepository->getWorstSuccessRateCities();
@@ -162,19 +159,6 @@ class DownloadMajorCityDataCommand extends Command
 
         $post->setContent($content);
         $this->entityManager->persist($post);
-        $this->entityManager->flush();
-    }
-
-    protected function removeAllPosts()
-    {
-        $postRepository = $this
-            ->entityManager
-            ->getRepository(Post::class)
-        ;
-        $posts = $postRepository->findAll();
-        foreach ($posts as $post) {
-            $this->entityManager->remove($post);
-        }
         $this->entityManager->flush();
     }
 

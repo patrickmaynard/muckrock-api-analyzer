@@ -77,11 +77,11 @@ x Increase the number of listed cities from three to five
 x Change the order of results, so newest are shown on top
 x Include the best few along with the worst few
 x Get rid of $this->removeAllPosts() in the command
-* Add app:posts:delete command that takes an optional date argument
-* Add app:major-cities:delete command that takes an optional name argument
+x Add app:posts:delete command
+* Add app:major-cities:delete command
 * Add custom exceptions when no cities have been loaded
 * Change app:download-major-city-data to app:posts:create and update this README file
-* Move most logic from the scraping command to a service
+* Move most logic from the commands to services
 * Create a cron job to run the thing every week, adding a how-to in this file
 * Add an emailer to send the latest updates to your inbox
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
