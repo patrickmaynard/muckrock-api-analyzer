@@ -78,16 +78,17 @@ echo "docker/database/data/" >> .git/info/exclude
 
 #### TODOs:
 
-x Increase the number of listed cities from three to five
-x Change the order of results, so newest are shown on top
-x Include the best few along with the worst few
-x Add app:posts:delete command
-x Add app:major-cities:delete command
-x Change app:setup to app:major-cities:load
-x Change app:download-major-city-data to app:posts:create and update this README file to include all four commands
-x Change command class names to match the new command names
+* x Increase the number of listed cities from three to five
+* x Change the order of results, so newest are shown on top
+* x Include the best few along with the worst few
+* x Add app:posts:delete command
+* x Add app:major-cities:delete command
+* x Change app:setup to app:major-cities:load
+* x Change app:download-major-city-data to app:posts:create and update this README file to include all four commands
+* x Change command class names to match the new command names
 * Add custom exceptions when app:posts:create is run without any cities loaded
 x Test all four commands
+* Figure out why migrations are broken
 * Create a cron job to run the thing every month, adding a how-to in this file
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
