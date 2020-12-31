@@ -20,13 +20,11 @@ cd docker
 docker-compose up
 ```
 
-## Compose
-
-### Database (MariaDB)
+#### Database (MariaDB)
 
 ...
 
-### PHP (PHP-FPM)
+#### PHP (PHP-FPM)
 
 Composer is included
 
@@ -34,7 +32,7 @@ Composer is included
 docker-compose run php-fpm composer 
 ```
 
-To run fixtures
+To load fixtures
 
 ```
 docker-compose run php-fpm bin/console doctrine:fixtures:load
@@ -46,11 +44,11 @@ If you're lazy though and want to get into the bash command line in the php-fpm 
 docker-compose run php-fpm bash
 ```
 
-### Webserver (Nginx)
+#### Webserver (Nginx)
 
 ...
 
-### Adding folders to local .git/info/exclude
+#### Adding folders to local .git/info/exclude
 
 ```
 cd ..
@@ -58,35 +56,45 @@ echo "docker/logs/" >> .git/info/exclude
 echo "docker/database/data/" >> .git/info/exclude
 ```
 
-### Importing the major cities from cities.json
+#### Importing the major cities from cities.json
 
 ```
-/var/www/bin/console app:setup
+/var/www/bin/console app:major-cities:load
 ```
 
-### Running the analyzer
+#### Running the analyzer and creating posts
 
 ```
-/var/www/bin/console app:download-major-city-data
+/var/www/bin/console app:posts:create
 ```
 (To see results, visit http://localhost/)
 
-### TODOs:
+#### Deleting things if you want to start fresh
+
+```
+/var/www/bin/console app:posts:delete
+/var/www/bin/console app:major-cities:delete
+```
+
+#### TODOs:
 
 x Increase the number of listed cities from three to five
 x Change the order of results, so newest are shown on top
 x Include the best few along with the worst few
-x Get rid of $this->removeAllPosts() in the command
 x Add app:posts:delete command
-* Add app:major-cities:delete command
-* Add custom exceptions when no cities have been loaded
-* Change app:download-major-city-data to app:posts:create and update this README file
-* Move most logic from the commands to services
-* Create a cron job to run the thing every week, adding a how-to in this file
-* Add an emailer to send the latest updates to your inbox
+x Add app:major-cities:delete command
+x Change app:setup to app:major-cities:load
+x Change app:download-major-city-data to app:posts:create and update this README file to include all four commands
+x Change command class names to match the new command names
+* Add custom exceptions when app:posts:create is run without any cities loaded
+x Test all four commands
+* Create a cron job to run the thing every month, adding a how-to in this file
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
+* Create commands for populating and deleting the Rankings, including an optional date argument for deletion
 * Add line charts of the best and worst, ranked over time
 * Deploy to muckdata.patrickmaynard.com instead of just running it locally
+* Add an emailer to send the latest updates to your inbox
 * Maybe add weekly or monthly tweets, eventually?
 * Maybe add a Sonata admin interface for editing/removing the posts
+* If a Sonata admin interface has been created, see what logic can be consolidated in services

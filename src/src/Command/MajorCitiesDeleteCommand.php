@@ -11,10 +11,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class SetupCommand extends Command
+class MajorCitiesDeleteCommand extends Command
 {
-    protected static $defaultName = 'app:setup';
-    protected EntityManagerInterface $entityManager;
+    protected static $defaultName = 'app:major-cities:delete';
+    protected $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -24,28 +24,35 @@ class SetupCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Imports JSON for major city URLs');
+        $this
+            ->setDescription('Deletes all major cities')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $filePath = getcwd() . DIRECTORY_SEPARATOR . 'cities.json';
+        $count = $this->removeAllCities();
 
-        $cities = json_decode(file_get_contents($filePath));
-
-        foreach ($cities as $city) {
-            $majorCity = new MajorCity;
-            $majorCity->setName($city->name);
-            $majorCity->setAbsoluteUrl($city->absolute_url);
-            $this->entityManager->persist($majorCity);
-        }
-
-        $this->entityManager->flush();
-
-        $io->success('Cities imported from cities.json.');
+        $io->success($count . ' major cities have been deleted.');
+        $io->success('To reload JSON, use the app:major-cities:load command.');
 
         return 0;
+    }
+
+    protected function removeAllCities()
+    {
+        $majorCityRepository = $this
+            ->entityManager
+            ->getRepository(MajorCity::class)
+        ;
+        $cities = $majorCityRepository->findAll();
+        $count = count($cities);
+        foreach ($cities as $city) {
+            $this->entityManager->remove($city);
+        }
+        $this->entityManager->flush();
+        return $count;
     }
 }

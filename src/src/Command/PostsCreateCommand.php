@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\MajorCity;
 use App\Entity\Post;
+use App\Exception\MissingCitiesException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,9 +13,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class DownloadMajorCityDataCommand extends Command
+class PostsCreateCommand extends Command
 {
-    protected static $defaultName = 'app:download-major-city-data';
+    protected static $defaultName = 'app:posts:create';
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
     protected const RATE_LIMIT_DELAY = 2;
     protected const NUMBER_OF_CITIES = 50;
@@ -43,6 +44,7 @@ class DownloadMajorCityDataCommand extends Command
         OutputInterface $output
     ): int {
         $io = new SymfonyStyle($input, $output);
+        $this->checkForMissingCitiesException();
 
         $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
@@ -162,16 +164,13 @@ class DownloadMajorCityDataCommand extends Command
         $this->entityManager->flush();
     }
 
-    protected function removeAllCities()
+    protected function checkForMissingCitiesException()
     {
-        $majorCityRepository = $this
-            ->entityManager
-            ->getRepository(MajorCity::class)
-        ;
-        $cities = $majorCityRepository->findAll();
-        foreach ($cities as $city) {
-            $this->entityManager->remove($city);
+        $cities = $this->majorCityRepository->findAll();
+        if (count($cities) === 0) {
+            throw new MissingCitiesException(
+                'Please run app:major-cities:load to load cities.'
+            );
         }
-        $this->entityManager->flush();
     }
 }
