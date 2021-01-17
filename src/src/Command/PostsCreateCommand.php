@@ -17,7 +17,7 @@ class PostsCreateCommand extends Command
 {
     protected static $defaultName = 'app:posts:create';
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
-    protected const RATE_LIMIT_DELAY = 2;
+    protected const RATE_LIMIT_DELAY = 5;
     protected const NUMBER_OF_CITIES = 50;
     protected $entityManager;
     protected $majorCityRepository;
@@ -49,7 +49,6 @@ class PostsCreateCommand extends Command
         $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
             $page = $this->getNextEndpointAsObj();
-            sleep(self::RATE_LIMIT_DELAY);
             foreach ($page->results as $jurisdiction) {
                 $majorCity = $this->majorCityRepository
                     ->findOneBy(['absoluteUrl' => $jurisdiction->absolute_url])
@@ -85,15 +84,13 @@ class PostsCreateCommand extends Command
 
     protected function getNextEndpointAsObj()
     {
+        sleep(self::RATE_LIMIT_DELAY);
         if ($this->nextPageEndpoint === NULL) {
             $this->nextPageEndpoint = self::FIRST_ENDPOINT;
         }
-
-        if ($this->nextPageEndpoint === NULL) {
-            return false;
-        }
-
+        echo "\n" . $this->nextPageEndpoint . "\n";
         $asObj = json_decode(file_get_contents($this->nextPageEndpoint));
+
         return $asObj;
     }
 

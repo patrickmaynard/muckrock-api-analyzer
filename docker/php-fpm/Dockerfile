@@ -1,4 +1,7 @@
-FROM php:fpm-alpine
+#FROM php:fpm-alpine
+#Explicitly using 7 for now to prevent weird bugs until Symfony fixes them.
+
+FROM php:7-fpm-alpine
 
 COPY wait-for-it.sh /usr/bin/wait-for-it
 
@@ -15,5 +18,7 @@ WORKDIR /var/www
 CMD composer install ; wait-for-it database:3306 -- bin/console doctrine:migrations:migrate ;  php-fpm 
 
 RUN apk add bash
+
+RUN apk add make
 
 EXPOSE 9000

@@ -56,6 +56,14 @@ echo "docker/logs/" >> .git/info/exclude
 echo "docker/database/data/" >> .git/info/exclude
 ```
 
+#### Recreating the database and running migrations
+
+To recreate the database from inside the php-fpm container:
+
+```
+make db
+```
+
 #### Importing the major cities from cities.json
 
 ```
@@ -78,17 +86,9 @@ echo "docker/database/data/" >> .git/info/exclude
 
 #### TODOs:
 
-* x Increase the number of listed cities from three to five
-* x Change the order of results, so newest are shown on top
-* x Include the best few along with the worst few
-* x Add app:posts:delete command
-* x Add app:major-cities:delete command
-* x Change app:setup to app:major-cities:load
-* x Change app:download-major-city-data to app:posts:create and update this README file to include all four commands
-* x Change command class names to match the new command names
-* Add custom exceptions when app:posts:create is run without any cities loaded
-x Test all four commands
-* Figure out why migrations are broken
+* x Add custom exceptions when app:posts:create is run without any cities loaded
+* x Test all four commands
+* Figure out why file_get_contents is failing -- see https://stackoverflow.com/questions/65762628
 * Create a cron job to run the thing every month, adding a how-to in this file
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
@@ -97,5 +97,6 @@ x Test all four commands
 * Deploy to muckdata.patrickmaynard.com instead of just running it locally
 * Add an emailer to send the latest updates to your inbox
 * Maybe add weekly or monthly tweets, eventually?
+* Figure out why migrations are broken
 * Maybe add a Sonata admin interface for editing/removing the posts
 * If a Sonata admin interface has been created, see what logic can be consolidated in services
