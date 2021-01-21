@@ -17,7 +17,7 @@ class PostsCreateCommand extends Command
 {
     protected static $defaultName = 'app:posts:create';
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
-    protected const RATE_LIMIT_DELAY = 5;
+    protected const RATE_LIMIT_DELAY = 15;
     protected const NUMBER_OF_CITIES = 50;
     protected $entityManager;
     protected $majorCityRepository;
@@ -47,8 +47,11 @@ class PostsCreateCommand extends Command
         $this->checkForMissingCitiesException();
 
         $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
-        while ($this->getNextEndpointAsObj() && $this->isOutdated()) {
+        while ($this->isOutdated()) {
             $page = $this->getNextEndpointAsObj();
+            if (!$page) {
+                break;
+            }
             foreach ($page->results as $jurisdiction) {
                 $majorCity = $this->majorCityRepository
                     ->findOneBy(['absoluteUrl' => $jurisdiction->absolute_url])
