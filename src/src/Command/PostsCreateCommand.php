@@ -94,7 +94,6 @@ class PostsCreateCommand extends Command
         if ($this->nextPageEndpoint === NULL) {
             $this->nextPageEndpoint = self::FIRST_ENDPOINT;
         }
-        echo "\n" . $this->nextPageEndpoint . "\n";
         $response = $client->request(
             'GET',
             $this->nextPageEndpoint,
