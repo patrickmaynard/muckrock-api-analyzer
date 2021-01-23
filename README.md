@@ -88,9 +88,7 @@ make db
 
 * x Add custom exceptions when app:posts:create is run without any cities loaded
 * x Test all four commands
-* Figure out why file_get_contents is failing -- see https://stackoverflow.com/questions/65762628
-  (Latest suggestion from SO: Try using Guzzle with a long timeout.)
-* Create a cron job to run the thing every month, adding a how-to in this file
+* x Figure out why file_get_contents is failing -- see https://stackoverflow.com/questions/65762628
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
 * Create commands for populating and deleting the Rankings, including an optional date argument for deletion
@@ -99,5 +97,6 @@ make db
 * Add an emailer to send the latest updates to your inbox
 * Maybe add weekly or monthly tweets, eventually?
 * Figure out why migrations are broken
+* Create a cron job to run the thing every month, adding a how-to in this file
 * Maybe add a Sonata admin interface for editing/removing the posts
 * If a Sonata admin interface has been created, see what logic can be consolidated in services

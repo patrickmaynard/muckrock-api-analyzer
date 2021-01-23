@@ -17,7 +17,8 @@ class PostsCreateCommand extends Command
 {
     protected static $defaultName = 'app:posts:create';
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
-    protected const RATE_LIMIT_DELAY = 15;
+    protected const RATE_LIMIT_DELAY = 2;
+    protected const CONNECT_TIMEOUT_TIME = 120;
     protected const NUMBER_OF_CITIES = 50;
     protected $entityManager;
     protected $majorCityRepository;
@@ -88,11 +89,20 @@ class PostsCreateCommand extends Command
     protected function getNextEndpointAsObj()
     {
         sleep(self::RATE_LIMIT_DELAY);
+
+        $client = new \GuzzleHttp\Client();
         if ($this->nextPageEndpoint === NULL) {
             $this->nextPageEndpoint = self::FIRST_ENDPOINT;
         }
         echo "\n" . $this->nextPageEndpoint . "\n";
-        $asObj = json_decode(file_get_contents($this->nextPageEndpoint));
+        $response = $client->request(
+            'GET',
+            $this->nextPageEndpoint,
+            [
+                'connect_timeout' => self::CONNECT_TIMEOUT_TIME,
+            ]
+        );
+        $asObj = json_decode($response->getBody());
 
         return $asObj;
     }
