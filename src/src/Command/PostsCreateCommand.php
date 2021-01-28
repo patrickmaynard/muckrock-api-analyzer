@@ -17,7 +17,7 @@ class PostsCreateCommand extends Command
 {
     protected static $defaultName = 'app:posts:create';
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
-    protected const RATE_LIMIT_DELAY = 2;
+    protected const RATE_LIMIT_DELAY = 3;
     protected const CONNECT_TIMEOUT_TIME = 120;
     protected const NUMBER_OF_CITIES = 50;
     protected $entityManager;
@@ -118,8 +118,8 @@ class PostsCreateCommand extends Command
     protected function analyzeAndCreatePost()
     {
 
-        $worstResponseTimeCities = $this->majorCityRepository->getWorstResponseTimeCities();
-        $worstSuccessRateCities = $this->majorCityRepository->getWorstSuccessRateCities();
+        //$worstResponseTimeCities = $this->majorCityRepository->getWorstResponseTimeCities();
+        //$worstSuccessRateCities = $this->majorCityRepository->getWorstSuccessRateCities();
         $bestResponseTimeCities = $this->majorCityRepository->getBestResponseTimeCities();
         $bestSuccessRateCities = $this->majorCityRepository->getBestSuccessRateCities();
         $post = new Post;
@@ -127,25 +127,7 @@ class PostsCreateCommand extends Command
         $todayString = $now->format('Y-m-d');
         $post->setName($todayString);
 
-        $content = '<h3>Worst average response times</h3>';
-        foreach ($worstResponseTimeCities as $city) {
-            /* @var MajorCity $city */
-            $content .= $city->getName()
-                . ' - '
-                . $city->getAverageResponseTime()
-                . ' days<br>'
-            ;
-        }
-
-        $content .= '<h3>Worst success rates</h3>';
-        foreach ($worstSuccessRateCities as $city) {
-            /* @var MajorCity $city */
-            $content .= $city->getName()
-                . ' - '
-                . $city->getSuccessRate()
-                . '%<br>'
-            ;
-        }
+        $content = '';
 
         $content .= '<h3>Best average response times</h3>';
         foreach ($bestResponseTimeCities as $city) {

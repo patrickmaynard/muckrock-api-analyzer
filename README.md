@@ -89,6 +89,8 @@ make db
 * x Add custom exceptions when app:posts:create is run without any cities loaded
 * x Test all four commands
 * x Figure out why file_get_contents is failing -- see https://stackoverflow.com/questions/65762628
+* Update the post body length limit, then extend the rankings to 50 items
+* Allow the `app:posts:create` command to take in a url argument that will be the next url to hit. That way, you can pick up where you left off if an error occurs.
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
 * Create commands for populating and deleting the Rankings, including an optional date argument for deletion

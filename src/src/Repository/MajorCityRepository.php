@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class MajorCityRepository extends ServiceEntityRepository
 {
-    public const CITIES_TO_SHOW = 5;
+    public const CITIES_TO_SHOW = 50;
 
     public function __construct(ManagerRegistry $registry)
     {

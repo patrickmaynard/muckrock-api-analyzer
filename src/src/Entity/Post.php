@@ -22,7 +22,7 @@ class Post
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=5000)
+     * @ORM\Column(type="text")
      */
     private $content;
 
