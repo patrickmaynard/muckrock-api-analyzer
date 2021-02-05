@@ -1,4 +1,4 @@
-## Response times
+## Ranked by response time:
 
 Columbus - 24 days
 Denver - 34 days
@@ -51,7 +51,7 @@ Tampa - 158 days
 Portland - 210 days
 Albuquerque - 339 days
 
-## Success rates
+## Ranked by success rate:
 
 Raleigh - 51.136363636364%
 San Diego - 48.356807511737%
