@@ -21,4 +21,6 @@ RUN apk add bash
 
 RUN apk add make
 
+RUN apk add rsync
+
 EXPOSE 9000
