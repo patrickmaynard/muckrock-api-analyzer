@@ -89,11 +89,11 @@ make db
 * x Add custom exceptions when app:posts:create is run without any cities loaded
 * x Test all four commands
 * x Figure out why file_get_contents is failing -- see https://stackoverflow.com/questions/65762628
-x Update the post body length limit, then extend the rankings to 50 items
-x Create a build script that pushes to a private build repository
-x Deploy to tranparency.patrickmaynard.com instead of just running it locally
-x Create a cron job to run the thing every month
-* Add caveats at the top of your index template, stating that you are a private individual not affiliated with MuckRock, and that comparisons are not "apples to apples" as Michael Morisy put it.
+* x Update the post body length limit, then extend the rankings to 50 items
+* x Create a build script that pushes to a private build repository
+* x Deploy to tranparency.patrickmaynard.com instead of just running it locally
+* x Create a cron job to run the thing every month
+* Add caveats at the top of your index template, stating that you are a private individual not affiliated with MuckRock, and that comparisons are not "apples to apples" as Michael Morisy put it. Maybe add some more caveats too, depending on how your Sludge story turns out.
 * Allow the `app:posts:create` command to take in a url argument that will be the next url to hit. That way, you can pick up where you left off if an error occurs. (This will also involve re-enabliig url output -- not so pretty, but useful. Maybe make it optional.)
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)
 * Change from using a Post entity to using a Ranking entity, with more specific fields
