@@ -129,7 +129,7 @@ class PostsCreateCommand extends Command
 
         $content = '';
 
-        $content .= '<h3>Best average response times</h3>';
+        $content .= '<h3>Ranked by average response times (best first)</h3>';
         foreach ($bestResponseTimeCities as $city) {
             /* @var MajorCity $city */
             $content .= $city->getName()
@@ -139,7 +139,7 @@ class PostsCreateCommand extends Command
             ;
         }
 
-        $content .= '<h3>Best success rates</h3>';
+        $content .= '<h3>Ranked by success rates (best first)</h3>';
         foreach ($bestSuccessRateCities as $city) {
             /* @var MajorCity $city */
             $content .= $city->getName()
