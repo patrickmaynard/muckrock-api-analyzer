@@ -2,9 +2,11 @@
 
 This project sets up an analyzer that spits out the least responsive American cities when it comes to public document requests.
 
-Modified from https://github.com/patrickmaynard/symfony-5-docker
+It was used in writing this article: https://readsludge.com/2021/02/23/the-least-transparent-big-city-in-america/
 
-The analyzer is a bit funny. Because the v1 of the MuckRock API doesn't allow us to pull up a jurisdiction directly by slug, we instead cycle through all the jurisdictions, pulling out only the ones that we need.
+It was modified from this repo: https://github.com/patrickmaynard/symfony-5-docker
+
+The analyzer is a bit funny. Because v1 of the MuckRock API doesn't allow us to pull up a jurisdiction directly by slug, we instead cycle through all the jurisdictions, pulling out only the ones that we need.
 
 Still, this should get us some useful information, albeit slowly.
 
