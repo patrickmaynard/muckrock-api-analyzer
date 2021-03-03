@@ -1,6 +1,8 @@
-# Analysis of responsiveness of top 50 American cities
+# Analysis of responsiveness of 50 largest American cities
 
-This project sets up an analyzer that spits out the least responsive American cities when it comes to public document requests.
+This project sets up an analyzer that spits out rankings of American cities when it comes to transparency via public document requests.
+
+It powers this page of monthly rankings: http://transparency.patrickmaynard.com
 
 It was used in writing this article: https://readsludge.com/2021/02/23/the-least-transparent-big-city-in-america/
 
