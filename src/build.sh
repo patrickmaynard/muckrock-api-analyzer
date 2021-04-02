@@ -16,6 +16,6 @@ rsync -avr --exclude='.git' --exclude='.env.local' --exclude='.gitignore' --excl
 cd ../muckrock-api-analyzer-build
 git add *
 git commit -m "Update"
-git config --global user.email "$EMAIL"
-git config --global user.name "$USER_NAME"
+git config --global user.email "{$EMAIL}"
+git config --global user.name "{$USER_NAME}"
 git push
