@@ -6,3 +6,9 @@ db:
 	# Migrations are broken at the moment. See https://stackoverflow.com/questions/65539247.
 	# TODO: Fix them. Meanwhile ...
 	bin/console doctrine:schema:update --force
+
+clear:
+	php bin/console cache:clear
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
