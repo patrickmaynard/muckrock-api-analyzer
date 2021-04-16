@@ -109,5 +109,6 @@ make db
 * Add an emailer to send the latest updates to users' inboxes
 * Maybe add monthly tweets, eventually?
 * Figure out why migrations are broken
-* Maybe add a Sonata admin interface for editing/removing the rankings and email addresses
+* Buy a wildcard certificate to allow secure login to the eventual Sonata admin (and any others you might set up on other subdomains)
+* Add a Sonata admin interface for editing/removing the rankings and email addresses
 * If a Sonata admin interface has been created, see what logic can be consolidated in services
