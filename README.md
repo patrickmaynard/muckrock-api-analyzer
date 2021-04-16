@@ -112,3 +112,4 @@ make db
 * Buy a wildcard certificate to allow secure login to the eventual Sonata admin (and any others you might set up on other subdomains)
 * Add a Sonata admin interface for editing/removing the rankings and email addresses
 * If a Sonata admin interface has been created, see what logic can be consolidated in services
+* Update the template to be a little nicer looking
