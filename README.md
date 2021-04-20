@@ -24,10 +24,6 @@ cd docker
 docker-compose up
 ```
 
-#### Database (MariaDB)
-
-...
-
 #### PHP (PHP-FPM)
 
 Composer is included
@@ -47,10 +43,6 @@ If you're lazy though and want to get into the bash command line in the php-fpm 
 ```
 docker-compose run php-fpm bash
 ```
-
-#### Webserver (Nginx)
-
-...
 
 #### Adding folders to local .git/info/exclude
 
