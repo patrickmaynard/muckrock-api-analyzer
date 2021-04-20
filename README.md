@@ -1,6 +1,6 @@
 # Analysis of responsiveness of 50 largest American cities
 
-This project sets up an analyzer that spits out rankings of American cities when it comes to transparency via public document requests.
+This project sets up an analyzer that spits out rankings of American metro areas when it comes to transparency via public document requests.
 
 It powers this page of monthly rankings: http://transparency.patrickmaynard.com
 
