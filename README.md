@@ -99,7 +99,7 @@ make db
 * x Create a cron job to run the thing every month
 * x Add caveats at the top of your index template, stating that you are a private individual not affiliated with MuckRock, and that comparisons are not "apples to apples" as Michael Morisy put it. Maybe add some more caveats too, depending on how your Sludge story turns out.
 * x Link out to MuckRock in your template.
-* Edit template to be more specific about what this is (metro transparency rankings, based on MuckRock, etc.,.)
+* x Edit template to be more specific about what this is (metro transparency rankings, based on MuckRock, etc.,.)
 * Move remaining TODO items to actual GitHub tickets.
 * Allow the `app:posts:create` command to take in a url argument that will be the next url to hit. That way, you can pick up where you left off if an error occurs. (This will also involve re-enabliig url output -- not so pretty, but useful. Maybe make it optional.)
 * Add a testing pipeline for GitHub (and add this TODO item to the parent repository)

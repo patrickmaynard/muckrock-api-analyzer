@@ -1,15 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Analysis results</h1>
+    <h1>Metro transparency rankings</h1>
 
     <p>
-        This is a ranking of MuckRock's API content for the 50 largest U.S. cities. It is updated automatically every month. A few caveats:
+        This is a ranking of transparency based on MuckRock's API content for the 50 largest U.S. cities. It is updated automatically every month. A few caveats:
     </p>
     <ul class="caveats">
         <li>I am a private individual not affiliated with MuckRock. I'm just using their API.</li>
         <li>All rankings cover the time period from the first request in a city to the date of the analysis. This means that rankings may not change much from month to month, since there are years' worth of data points being analyzed each month.</li>
-        <li>MuckRock's definition of a "city" can be a bit different from the official government definition. For example, MuckRock's Portland, Oregon endpoint aggregates data not only from city agencies, but from the county prosecutor's office, which is not under city control. That said, in most large cities, the city and the police department are the recipients of the largest number of public records requests.</li>
+        <li>These are metro rankings, not city rankings. For example, MuckRock's Portland, Oregon endpoint aggregates data not only from city agencies, but from the county prosecutor's office, which is not under city control. That said, in most large metro areas, the city and the police department are the recipients of the largest number of public records requests.</li>
         <li>As MuckRock's founder <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/michael-morisy-responses-one.txt">states</a>, city comparisons are not always apples-to-apples, as requesters in one city might be asking for difficult-to-find information, while requesters in another city might be making easy document reequests.</li>
         <li>As a Portland city representative states, city officials may differ with MuckRock on the definition of what a "successful" or "unsuccessful" request is -- especially if their cities fall at the bottom of the rankings. See his complaints <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/timothy-becker-responses-one.txt">here</a>.</li>
     </ul>
@@ -31,5 +31,8 @@
     </p>
     <p>
         Want to support MuckRock? <a target="_blank" href="https://www.muckrock.com/donate/">Donate to them today.</a>
+    </p>
+    <p>
+        Want to see more of my projects? Go to my <a href="http://home.patrickmaynard.com">home page</a>.
     </p>
 {% endblock %}
