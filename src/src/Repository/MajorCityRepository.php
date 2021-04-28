@@ -26,7 +26,8 @@ class MajorCityRepository extends ServiceEntityRepository
         $now = new \DateTime();
         $today = $now->format('Y-m-d');
         return $this->createQueryBuilder('m')
-            ->andWhere('m.lastUpdate < :today or m.lastUpdate IS NULL')
+            ->where('m.lastUpdate < :today')
+            ->orWhere('m.lastUpdate IS NULL')
             ->setParameter('today',  $today)
             ->orderBy('m.id', 'ASC')
             ->setMaxResults(1)

@@ -16,14 +16,25 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class PostsCreateCommand extends Command
 {
     protected static $defaultName = 'app:posts:create';
+
     protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
-    protected const RATE_LIMIT_DELAY = 3;
+
+    protected const RATE_LIMIT_DELAY = 1;
+
     protected const CONNECT_TIMEOUT_TIME = 120;
-    protected const NUMBER_OF_CITIES = 50;
+
     protected $entityManager;
+
     protected $majorCityRepository;
+
     protected $nextPageEndpoint;
 
+    /**
+     * Constructor
+     *
+     * PostsCreateCommand constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -34,12 +45,26 @@ class PostsCreateCommand extends Command
         parent::__construct();
     }
 
+    /**
+     * Cofigure description, options
+     */
     protected function configure()
     {
         $description = 'Downloads MuckRock data for major American cities';
-        $this->setDescription($description);
+        $this
+            ->setDescription($description)
+            ->addOption('show-urls', null, InputOption::VALUE_NONE, 'Whether to show urls')
+            ->addOption('resume-from-url', null, InputOption::VALUE_REQUIRED, 'Which url to resume scraping from')
+        ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws MissingCitiesException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     protected function execute(
         InputInterface $input,
         OutputInterface $output
@@ -47,9 +72,8 @@ class PostsCreateCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $this->checkForMissingCitiesException();
 
-        $counter = 1; // A little weird to start on 1, but this gives us a nice visual counter :-)
         while ($this->isOutdated()) {
-            $page = $this->getNextEndpointAsObj();
+            $page = $this->getNextEndpointAsObj($input);
             if (!$page) {
                 break;
             }
@@ -58,7 +82,7 @@ class PostsCreateCommand extends Command
                     ->findOneBy(['absoluteUrl' => $jurisdiction->absolute_url])
                 ;
                 if ($majorCity !== NULL) {
-                    echo $counter . '. ' . $jurisdiction->name . ' ... ';
+                    echo $jurisdiction->name . ' ... ';
                     /* @var MajorCity $majorCity */
                     $majorCity->setAverageResponseTime(
                         $jurisdiction->average_response_time
@@ -69,10 +93,11 @@ class PostsCreateCommand extends Command
                     $majorCity->setLastUpdate(
                         new \DateTime()
                     );
-                    if ($counter === self::NUMBER_OF_CITIES) {
-                        $this->entityManager->flush();
-                        break(2);
-                    }
+
+                    //Doing a flush() inside of a loop is usually not a great idea.
+                    //But we have a rate-limit delay anyway, so it's harmless here.
+                    //Also, it allows our isOutdated() method to work correctly.
+                    $this->entityManager->flush();
                     $counter++;
                 }
                 $this->nextPageEndpoint = $page->next;
@@ -86,14 +111,29 @@ class PostsCreateCommand extends Command
         return 0;
     }
 
-    protected function getNextEndpointAsObj()
+    /**
+     * @param InputInterface $input
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function getNextEndpointAsObj(InputInterface $input)
     {
         sleep(self::RATE_LIMIT_DELAY);
 
         $client = new \GuzzleHttp\Client();
         if ($this->nextPageEndpoint === NULL) {
-            $this->nextPageEndpoint = self::FIRST_ENDPOINT;
+            $resumeFrom = $input->getOption('resume-from-url');
+            if (!empty($resumeFrom)) {
+                $this->nextPageEndpoint = $resumeFrom;
+            } else {
+                $this->nextPageEndpoint = self::FIRST_ENDPOINT;
+            }
         }
+
+        if ($input->getOption('show-urls')) {
+            echo PHP_EOL . $this->nextPageEndpoint . PHP_EOL;
+        }
+
         $response = $client->request(
             'GET',
             $this->nextPageEndpoint,
@@ -106,6 +146,10 @@ class PostsCreateCommand extends Command
         return $asObj;
     }
 
+    /**
+     * Is the scraped data in our database outdated?
+     * @return bool
+     */
     protected function isOutdated()
     {
         $nextOutdatedRecord = $this->majorCityRepository->getNextUnfilled();
@@ -115,6 +159,10 @@ class PostsCreateCommand extends Command
         return true;
     }
 
+    /**
+     * Create the actual post
+     * @throws \Exception
+     */
     protected function analyzeAndCreatePost()
     {
 
@@ -155,6 +203,11 @@ class PostsCreateCommand extends Command
         $this->entityManager->flush();
     }
 
+    /**
+     * Do we have any metro areas to check?
+     *
+     * @throws MissingCitiesException
+     */
     protected function checkForMissingCitiesException()
     {
         $cities = $this->majorCityRepository->findAll();
