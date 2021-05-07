@@ -15,7 +15,7 @@ Still, this should get us some useful information, albeit slowly.
 To run the Docker containers:
 
 ```
-git clone https://github.com/patrickmaynard/symfony-5-docker.git
+git clone https://github.com/patrickmaynard/muckrock-api-analyzer.git
 
 cd symfony-5-docker
 
