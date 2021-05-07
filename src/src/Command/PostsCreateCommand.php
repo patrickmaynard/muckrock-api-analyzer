@@ -15,9 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class PostsCreateCommand extends Command
 {
-    protected static $defaultName = 'app:posts:create';
+    public static $defaultName = 'app:posts:create';
 
-    protected const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
+    public const FIRST_ENDPOINT = 'https://www.muckrock.com/api_v1/jurisdiction/?format=json&page=1';
 
     protected const RATE_LIMIT_DELAY = 1;
 
@@ -115,8 +115,13 @@ class PostsCreateCommand extends Command
      * @param InputInterface $input
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * Made this public so it could be unit tested.
+     * Most other functions use the database and so can't be unit tested.
+     * So they remain protected or private.
+     *
      */
-    protected function getNextEndpointAsObj(InputInterface $input)
+    public function getNextEndpointAsObj(InputInterface $input)
     {
         sleep(self::RATE_LIMIT_DELAY);
 
