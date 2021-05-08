@@ -60,6 +60,14 @@ To recreate the database from inside the php-fpm container:
 make db
 ```
 
+#### Running unit tests
+
+To run unit tests:
+
+```
+make test
+```
+
 #### Importing the major cities from cities.json
 
 ```
