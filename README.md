@@ -62,7 +62,7 @@ make db
 
 #### Running unit tests
 
-To run unit tests:
+To run unit tests from inside the php-fpm container:
 
 ```
 make test
