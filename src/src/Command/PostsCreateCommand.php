@@ -71,6 +71,7 @@ class PostsCreateCommand extends Command
     ): int {
         $io = new SymfonyStyle($input, $output);
         $this->checkForMissingCitiesException();
+        $counter = 0;
 
         while ($this->isOutdated()) {
             $page = $this->getNextEndpointAsObj($input);
