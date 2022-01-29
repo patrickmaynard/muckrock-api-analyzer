@@ -1,5 +1,41 @@
 * { box-sizing: border-box }
 
+html, body {
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: normal normal lighter 18px/1.15em sans-serif;
+    color: #212121;
+}
+a { color: inherit }
+p, ul, ol, dl {
+    margin-bottom: 1em;
+}
+ul > li, ol > li {
+    margin-bottom: .33em;
+}
+
+body > header,
+main {
+    width: 100vw;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+body > header > h1 {
+    font-size: 2rem;
+    line-height: 1em;
+    margin: .5em 0;
+    background-color: #5eb5e0;
+}
+
+h2, h3, h4, h5, h6 {
+    margin: .5em 0 1em 0;
+}
+
 ul.rankings {
     list-style-type: none;
 }
