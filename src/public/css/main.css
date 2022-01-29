@@ -17,6 +17,16 @@ p, ul, ol, dl {
 ul > li, ol > li {
     margin-bottom: .33em;
 }
+h2, h3, h4, h5, h6 {
+    margin: .5em 0 1em 0;
+    line-height: 1.25em;
+    font-weight: 600;
+}
+h2 { font-size: 1.5rem }
+h3 { font-size: 1.25rem }
+h4 { font-size: 1.15rem }
+h5 { font-size: .95rem }
+h6 { font-size: .85rem }
 
 body > header,
 main {
@@ -29,11 +39,12 @@ body > header > h1 {
     font-size: 2rem;
     line-height: 1em;
     margin: .5em 0;
-    background-color: #5eb5e0;
 }
 
-h2, h3, h4, h5, h6 {
-    margin: .5em 0 1em 0;
+section { margin-top: 2rem }
+section.introduction {
+    columns: 32rem 2;
+    column-gap: 2rem;
 }
 
 ul.rankings {
