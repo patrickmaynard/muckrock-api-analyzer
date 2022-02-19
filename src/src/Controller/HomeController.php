@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\RankingRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use App\Repository\PostRepository;
 
 class HomeController extends AbstractController
 {
@@ -13,12 +13,12 @@ class HomeController extends AbstractController
      * @Route("/", name="")
      * @Template
      */
-    public function index(PostRepository $postRepository)
+    public function index(RankingRepository $rankingRepository): array
     {
-        $posts = $postRepository->findAllReversed();
+        $rankings = $rankingRepository->findBy([], ['date' => 'DESC'], 10);
 
         return [
-            'posts' => $posts
+            'rankings' => $rankings,
         ];
     }
 }

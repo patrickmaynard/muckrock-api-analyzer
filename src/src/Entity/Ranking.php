@@ -31,7 +31,7 @@ class Ranking
      *
      * @ORM\Column(type="array", nullable=true)
      */
-    private ?array $cities;
+    private ?array $cities = [];
 
     /**
      * @return int

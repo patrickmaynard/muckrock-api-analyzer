@@ -18,11 +18,15 @@
     </p>
 
     <ul class="rankings">
-        {% for post in posts %}
+        {% for ranking in rankings %}
+            {% if ranking.cities is not null %}
             <li class="post">
-                <b>{{post.name}}</b>
-                <p>{{post.content|raw}}</p>
+                <b>{{ranking.date | date('d/m/Y')}}</b>
+                {% for city in ranking.cities|sort_cities %}
+                <div>{{ city.name }} | {{ city.response_time }} | {{ city.success_rate }}</div>
+                {% endfor %}
             </li>
+            {% endif %}
         {% endfor %}
     </ul>
 
