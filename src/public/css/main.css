@@ -1,0 +1,58 @@
+* { box-sizing: border-box }
+
+html, body {
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: normal normal lighter 18px/1.15em sans-serif;
+    color: #212121;
+}
+a { color: inherit }
+p, ul, ol, dl {
+    margin-bottom: 1em;
+}
+ul > li, ol > li {
+    margin-bottom: .33em;
+}
+h2, h3, h4, h5, h6 {
+    margin: .5em 0 1em 0;
+    line-height: 1.25em;
+    font-weight: 600;
+}
+h2 { font-size: 1.5rem }
+h3 { font-size: 1.25rem }
+h4 { font-size: 1.15rem }
+h5 { font-size: .95rem }
+h6 { font-size: .85rem }
+
+body > header,
+main {
+    width: 100vw;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+body > header > h1 {
+    font-size: 2rem;
+    line-height: 1em;
+    margin: .5em 0;
+}
+
+section { margin-top: 2rem }
+section.introduction {
+    columns: 32rem 2;
+    column-gap: 2rem;
+}
+
+ul.rankings {
+    list-style-type: none;
+}
+
+li.post {
+    padding: 10px 0;
+    border-top: 1px solid #555555;
+    width:90%;
+}

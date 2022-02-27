@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}MuckRock data analyzer{% endblock %}</title>
         {% block stylesheets %}
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="/css/main.css">
         {% endblock %}
     </head>
     <body>
+        {% block pageHeader %}
+        <header>
+            <h1>
+                Metro Transparency Ranking
+            </h1>
+        </header>
+        {% endblock %}
+        <main>
         {% block body %}{% endblock %}
+        </main>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
