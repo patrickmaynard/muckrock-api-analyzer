@@ -1,30 +1,40 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Metro transparency rankings</h1>
+    <section class="introduction">
+        <p>
+            This is a ranking of transparency based on MuckRock's API content for the 50 largest U.S. cities. It is updated automatically every month. A few caveats:
+        </p>
+        <h3>
+            Caveats
+        </h3>
+        <ul class="caveats">
+            <li>I am a private individual not affiliated with MuckRock. I'm just using their API.</li>
+            <li>All rankings cover the time period from the first request in a city to the date of the analysis. This means that rankings may not change much from month to month, since there are years' worth of data points being analyzed each month.</li>
+            <li>These are metro rankings, not city rankings. For example, MuckRock's Portland, Oregon endpoint aggregates data not only from city agencies, but from the county prosecutor's office, which is not under city control. That said, in most large metro areas, the city and the police department are the recipients of the largest number of public records requests.</li>
+            <li>As MuckRock's founder <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/michael-morisy-responses-one.txt">states</a>, city comparisons are not always apples-to-apples, as requesters in one city might be asking for difficult-to-find information, while requesters in another city might be making easy document reequests.</li>
+            <li>As a Portland city representative states, city officials may differ with MuckRock on the definition of what a "successful" or "unsuccessful" request is -- especially if their cities fall at the bottom of the rankings. See his complaints <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/timothy-becker-responses-one.txt">here</a>.</li>
+        </ul>
+        <p>
+            OK, that's all of the caveats. On to the rankings!
+        </p>
+    </section>
 
-    <p>
-        This is a ranking of transparency based on MuckRock's API content for the 50 largest U.S. cities. It is updated automatically every month. A few caveats:
-    </p>
-    <ul class="caveats">
-        <li>I am a private individual not affiliated with MuckRock. I'm just using their API.</li>
-        <li>All rankings cover the time period from the first request in a city to the date of the analysis. This means that rankings may not change much from month to month, since there are years' worth of data points being analyzed each month.</li>
-        <li>These are metro rankings, not city rankings. For example, MuckRock's Portland, Oregon endpoint aggregates data not only from city agencies, but from the county prosecutor's office, which is not under city control. That said, in most large metro areas, the city and the police department are the recipients of the largest number of public records requests.</li>
-        <li>As MuckRock's founder <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/michael-morisy-responses-one.txt">states</a>, city comparisons are not always apples-to-apples, as requesters in one city might be asking for difficult-to-find information, while requesters in another city might be making easy document reequests.</li>
-        <li>As a Portland city representative states, city officials may differ with MuckRock on the definition of what a "successful" or "unsuccessful" request is -- especially if their cities fall at the bottom of the rankings. See his complaints <a target="_blank" href="https://github.com/patrickmaynard/interview-notes-2021/blob/main/muckrock-sludge-story/timothy-becker-responses-one.txt">here</a>.</li>
-    </ul>
-    <p>
-        OK, that's all of the caveats. On to the rankings!
-    </p>
-
-    <ul class="rankings">
-        {% for post in posts %}
-            <li class="post">
-                <b>{{post.name}}</b>
-                <p>{{post.content|raw}}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <section class="rankings">
+        <header>
+            <h2>
+                Rankings
+            </h2>
+        </header>
+        <ul class="rankings">
+            {% for post in posts %}
+                <li class="post">
+                    <b>{{post.name}}</b>
+                    <p>{{post.content|raw}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
 
     <p>
         Want to mirror these rankings? Fork this repository via <a target="_blank" href="https://github.com/patrickmaynard/muckrock-api-analyzer">GitHub.</a>
