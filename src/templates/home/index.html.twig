@@ -27,10 +27,25 @@
             </h2>
         </header>
         <ul class="rankings">
-            {% for post in posts %}
-                <li class="post">
-                    <b>{{post.name}}</b>
-                    <p>{{post.content|raw}}</p>
+            {% for ranking in rankings %}
+                <li class="ranking">
+                    <h3>{{ ranking.date | date('Y-m-d') }}</h3>
+                    {% if ranking.cities is not null and ranking.cities is not empty %}
+                    <table>
+                        <tr>
+                            <th class="city">City</th>
+                            <th class="response-time">Average Response Time</th>
+                            <th class="success-rate">Success Rate</th>
+                        </tr>
+                        {% for city in ranking.cities %}
+                            <tr>
+                                <td class="city">{{ city.name }}</td>
+                                <td class="response-time">{{ city.response_time }}</td>
+                                <td class="success-rate">{{ city.success_rate }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

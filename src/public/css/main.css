@@ -51,8 +51,23 @@ ul.rankings {
     list-style-type: none;
 }
 
-li.post {
+li.ranking {
     padding: 10px 0;
     border-top: 1px solid #555555;
     width:90%;
 }
+li.ranking table {
+    width: 100%;
+}
+li.ranking th.city { width: 37.5% }
+li.ranking th.response-time {
+    width: 31.25%;
+    text-align: center;
+}
+li.ranking th.success-rate {
+    width: 31.25%;
+    text-align: center;
+}
+li.ranking td.city {}
+li.ranking td.response-time { text-align: center }
+li.ranking td.success-rate { text-align: center }
