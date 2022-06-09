@@ -88,6 +88,17 @@ make test
 /var/www/bin/console app:major-cities:delete
 ```
 
+#### Running the build script to populate the build repository
+
+From *inside* the docker container, run the following:
+
+```
+export OAUTH_TOKEN=<your-github-oauth-token>
+export USER_NAME=<your-github-username>
+export EMAIL=<your-github-email-address>
+./build.sh
+```
+
 #### TODOs:
 
 See GitHub issues.
