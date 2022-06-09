@@ -80,4 +80,15 @@ class Ranking
 
         return $this;
     }
+
+    public function getMaxSuccessRate()
+    {
+        $cities = $this->cities;
+
+        usort($cities, static function (array $a, array $b): int {
+            return $a['success_rate'] <=> $b['success_rate'];
+        });
+
+        return end($cities)['success_rate'];
+    }
 }
