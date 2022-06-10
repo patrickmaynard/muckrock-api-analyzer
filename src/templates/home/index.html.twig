@@ -27,10 +27,73 @@
             </h2>
         </header>
         <ul class="rankings">
-            {% for post in posts %}
-                <li class="post">
-                    <b>{{post.name}}</b>
-                    <p>{{post.content|raw}}</p>
+            <script>
+                function toggleRankingView(key, button) {
+                  let ranking = document.querySelector('#' + key);
+                  let labels = button.querySelectorAll('span');
+                  let views = ranking.querySelectorAll('.js-ranking-view');
+
+                  views.forEach(view => view.classList.toggle('hide'));
+                  labels.forEach(label => label.classList.toggle('hide'));
+                }
+            </script>
+            {% for ranking in rankings %}
+                <li class="ranking" id="ranking-{{ loop.index }}">
+                    <h3>{{ ranking.date | date('Y-m-d') }}</h3>
+                    {% if ranking.cities is not null and ranking.cities is not empty %}
+                    <nav>
+                        <button type="button" onclick="toggleRankingView('ranking-{{ loop.index }}', this)">
+                            <span>
+                                Graph
+                            </span>
+                            <span class="hide">
+                                Table
+                            </span>
+                        </button>
+                    </nav>
+                    <div id="ranking-table" class="js-ranking-view">
+                        <table>
+                            <tr>
+                                <th class="city">City</th>
+                                <th class="response-time">Average Response Time</th>
+                                <th class="success-rate">Success Rate</th>
+                            </tr>
+                            {% for city in ranking.cities %}
+                                <tr>
+                                    <td class="city">{{ city.name }}</td>
+                                    <td class="response-time">{{ city.response_time }}</td>
+                                    <td class="success-rate">{{ city.success_rate }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div id="ranking-graph" class="js-ranking-view hide">
+                        {% set last_city = ranking.cities | last %}
+                        {% set max_response_time = last_city.response_time %}
+                        {% set max_success_rate = ranking.getMaxSuccessRate() %}
+                        <table>
+                            <tr>
+                                <th>
+                                    City
+                                </th>
+                                <th>
+                                    &nbsp;
+                                </th>
+                            </tr>
+                            {% for city in ranking.cities %}
+                            <tr>
+                                <td class="city">
+                                    {{ city.name }}
+                                </td>
+                                <td class="graph">
+                                    <div class="response-time" style="width: {{ city.response_time * 100 / max_response_time }}%" title="average response time in days">&nbsp;</div>
+                                    <div class="success-rate" style="width: {{ city.success_rate * 100 / ranking.getMaxSuccessRate() }}%" title="success rate in percent">&nbsp;</div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

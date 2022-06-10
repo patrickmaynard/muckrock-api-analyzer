@@ -18,9 +18,7 @@ class RankingFixtures extends Fixture implements FixtureGroupInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $ranking = new Ranking();
-
-        $ranking
+        $january = (new Ranking())
             ->setDate(new DateTime('2022-01-28'))
             ->setCities(
                 [
@@ -30,8 +28,21 @@ class RankingFixtures extends Fixture implements FixtureGroupInterface
                 ]
             )
         ;
+        $manager->persist($january);
 
-        $manager->persist($ranking);
+        $february = (new Ranking())
+            ->setDate(new DateTime('2022-02-28'))
+            ->setCities(
+                [
+                    ['name' => 'Detroit', 'response_time' => 10, 'success_rate' => 30.555555555556],
+                    ['name' => 'Indianapolis', 'response_time' => 39, 'success_rate' => 31.818181818182],
+                    ['name' => 'Tulsa', 'response_time' => 25, 'success_rate' => 11.688311688312],
+                ]
+            )
+        ;
+
+        $manager->persist($february);
+
         $manager->flush();
     }
 
