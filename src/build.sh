@@ -12,7 +12,7 @@ git clone https://$OAUTH_TOKEN:x-oauth-basic@github.com/patrickmaynard/muckrock-
 cd www
 composer install --dev
 bin/console cache:clear
-rsync -avr --exclude='*.git*' --exclude='*.env.local*' --exclude='*.gitignore*' --exclude='*build.sh*' --exclude'*composer.*' ./ ../muckrock-api-analyzer-build
+rsync -avr --exclude='*.git*' --exclude='*.env.local*' --exclude='*.gitignore*' --exclude='*build.sh*' --exclude='*composer.*' ./ ../muckrock-api-analyzer-build
 cd ../muckrock-api-analyzer-build
 git add *
 git commit -m "Update"
