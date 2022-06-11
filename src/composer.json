@@ -2,11 +2,11 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "composer/package-versions-deprecated": "1.11.99.5",
+        "composer/package-versions-deprecated": "*",
         "doctrine/common": "^2",
         "doctrine/doctrine-bundle": "^2",
         "doctrine/doctrine-migrations-bundle": "^2",
@@ -27,7 +27,7 @@
         "symfony/css-selector": "^5.0",
         "symfony/maker-bundle": "^1.14",
         "symfony/phpunit-bridge": "^5.2",
-        "symfony/stopwatch": "5.0.*",
+        "symfony/stopwatch": "*",
         "symfony/web-profiler-bundle": "5.0.*"
     },
     "config": {
