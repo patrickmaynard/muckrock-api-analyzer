@@ -10,7 +10,7 @@ cd ..
 rm -rf muckrock-api-analyzer-build
 git clone https://$OAUTH_TOKEN:x-oauth-basic@github.com/patrickmaynard/muckrock-api-analyzer-build.git
 cd www
-composer install --dev
+composer install
 bin/console cache:clear
 rsync -avr --exclude='*.git*' --exclude='*.env.local*' --exclude='*.gitignore*' --exclude='*build.sh*' --exclude='*composer.*' ./ ../muckrock-api-analyzer-build
 cd ../muckrock-api-analyzer-build
